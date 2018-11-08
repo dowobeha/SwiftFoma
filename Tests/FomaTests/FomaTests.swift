@@ -7,9 +7,20 @@ final class FomaTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
         XCTAssertEqual(Foma().text, "Hello, 7")
+        print(Foma().version)
+        print(Foma.libraryVersion)
     }
 
+    func testEmptyFSM() {
+        let fsm = Foma.FSM(named: "bob")
+        print(fsm.name())
+        print(fsm.arity())
+        print(fsm.arccount())
+    }
+
+    
     static var allTests = [
-        ("testExample", testExample),
+      ("testExample", testExample),
+      ("testEmptyFSM", testEmptyFSM)
     ]
 }
