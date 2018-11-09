@@ -21,6 +21,9 @@ let package = Package(
         .target(
             name: "Foma",
             dependencies: ["CFoma"]),
+        .target(
+            name: "demo",
+            dependencies: ["Foma"]),
         .testTarget(
             name: "FomaTests",
             dependencies: ["Foma"]),

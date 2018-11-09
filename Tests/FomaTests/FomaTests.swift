@@ -12,7 +12,7 @@ final class FomaTests: XCTestCase {
     }
 
     func testEmptyFSM() {
-        let fsm = Foma.FSM(named: "bob")
+        let fsm = FSM(named: "bob")
         print(fsm.name())
         print(fsm.arity())
         print(fsm.arccount())
