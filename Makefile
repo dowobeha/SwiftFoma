@@ -13,4 +13,4 @@ test:
 
 
 clean:
-	rm -rf demo.bin .build
+	rm -rf demo.bin .build *~
