@@ -7,7 +7,7 @@ run: demo.bin
 	swift run   -Xlinker -lz -Xlinker -lreadline 
 
 
-test:
+test: demo.bin
 	swift test  -Xlinker -lz -Xlinker -lreadline 
 
 
