@@ -1,7 +1,7 @@
 import CFoma
 
 struct Foma {
-    var text = "Hello, \(swift_demo())"
+//    var text = "Hello, \(swift_demo())"
     let version = "\(MAJOR_VERSION).\(MINOR_VERSION).\(BUILD_VERSION)\(STATUS_VERSION)"
 
     struct SpecialSymbols {

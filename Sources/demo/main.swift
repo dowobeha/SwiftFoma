@@ -3,7 +3,7 @@ import Foma
 
 print("Hello, world!")
 
-let fsm = FSM(fromBinaryFile: "demo.bin")
+let fsm = FSM(fromBinaryFile: "/Users/lanes/work/yupik/swift/SwiftFoma/demo.bin")
 print(fsm.arccount())
 //let fsm = FSM(named: "bob")
 let word = "cat"
