@@ -7,8 +7,8 @@ final class FomaTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
 //        XCTAssertEqual(Foma().text, "Hello, 7")
-        print(Foma().version)
-        print(Foma.libraryVersion)
+//        print(Foma().version)
+        print(Foma.version)
     }
 
     func testEmptyFSM() {
