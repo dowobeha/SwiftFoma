@@ -33,9 +33,16 @@ public class FSM {
         }
 
         public init(fromBinaryFile filename: String) {
+            print("Attempting to open \(filename)")
             self.pointer = filename.withCString{ cstring -> UnsafeMutablePointer<fsm> in
                 let mutableCString = UnsafeMutablePointer<CChar>(mutating: cstring)
-                return CFoma.fsm_read_binary_file(mutableCString)
+                print(mutableCString)
+                if let result = CFoma.fsm_read_binary_file(mutableCString) {
+                    return result
+                } else {
+                    print("Error while attempting to load \(filename)")
+                    return UnsafeMutablePointer<fsm>(bitPattern: 0)!
+                }
             }
         }
 
@@ -98,6 +105,13 @@ public class FSM {
 
             let handle: UnsafeMutablePointer<apply_handle> = CFoma.apply_init(pointer)
 
+            " ".withCString{ (cstring:UnsafePointer<CChar>) in
+                let mutableCString = UnsafeMutablePointer<CChar>(mutating: cstring)
+                CFoma.apply_set_space_symbol(handle, mutableCString)
+                //    CFoma.apply_set_separator(handle, mutableCString)
+            }
+            
+          
             var results = [String]()           
 
             var input: String? = word // The first time we call the function, we want to use what the user provided
