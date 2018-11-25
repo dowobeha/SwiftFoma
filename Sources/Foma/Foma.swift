@@ -20,6 +20,9 @@ public struct Foma {
 
 }
 
+public enum FomaError : Error {
+    case fileNotFound
+}
 
 public class FSM {
 
@@ -32,18 +35,47 @@ public class FSM {
             }
         }
 
-        public init(fromBinaryFile filename: String) {
-            print("Attempting to open \(filename)")
-            self.pointer = filename.withCString{ cstring -> UnsafeMutablePointer<fsm> in
+    private static func getPointer(cstringFilename: UnsafePointer<Int8>) -> UnsafeMutablePointer<fsm>? {
+        let mutableCString = UnsafeMutablePointer<CChar>(mutating: cstringFilename)
+        
+        if let result = CFoma.fsm_read_binary_file(mutableCString) {
+            return result
+        } else {
+            return nil
+        }
+    }
+    
+    
+        public init?(fromBinaryFile filename: String) {
+            //print("Attempting to open \(filename)")
+            
+            if let pointer = filename.withCString(FSM.getPointer) {
+                self.pointer = pointer
+            } else {
+                return nil
+            }
+            /*
+            if let pointer = filename.withCString{ (cstring: UnsafePointer<Int8>) -> UnsafeMutablePointer<fsm> in
                 let mutableCString = UnsafeMutablePointer<CChar>(mutating: cstring)
-                print(mutableCString)
+                //print(mutableCString)
                 if let result = CFoma.fsm_read_binary_file(mutableCString) {
                     return result
                 } else {
                     print("Error while attempting to load \(filename)")
-                    return UnsafeMutablePointer<fsm>(bitPattern: 0)!
+                    //return UnsafeMutablePointer<fsm>(bitPattern: 0)!
+                    //throw FomaError.fileNotFound
+                    return nil
                 }
             }
+            
+            
+            
+            if pointer==nil {
+                return nil
+            } else {
+                self.pointer = pointer
+            }
+            */
         }
 
         deinit {
